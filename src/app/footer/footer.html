@@ -1,0 +1,74 @@
+<footer class="border-t bg-white pt-10">
+  <div class="mx-10 grid grid-cols-5 gap-10 px-8 pb-10">
+    <!-- Logo & Social -->
+    <div>
+      <img src="/logo.png" alt="Bogomatch Logo" class="w-48" />
+      <p class="font-primary my-4 text-sm text-gray-600">
+        Morbi cursus porttitor enim lobortis molestie. Duis gravida turpis dui,
+        eget bibendum magna congue nec.
+      </p>
+      <div class="flex space-x-4">
+        <a routerLink="#" class="text-secondary text-xl">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a routerLink="#" class="text-secondary text-xl">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div>
+      <h3 class="font-primary my-2 text-lg font-semibold">Navigation</h3>
+      <ul class="font-primary space-y-1 text-sm text-gray-700">
+        @for (item of firstLinks(); track item.name) {
+        <li><a routerLink="{{item.url}}"> {{item.name}} </a></li>
+        }
+      </ul>
+    </div>
+
+    <!-- Helps 1 -->
+    <div>
+      <h3 class="font-primary my-2 text-lg font-semibold">Helps</h3>
+      <ul class="font-primary space-y-1 text-sm text-gray-700">
+        @for (item of secondLinks(); track item.name) {
+        <li><a routerLink="{{item.url}}"> {{item.name}} </a></li>
+        }
+      </ul>
+    </div>
+
+    <!-- Helps 2 -->
+    <div>
+      <h3 class="font-primary my-2 text-lg font-semibold">Helps</h3>
+      <ul class="font-primary space-y-1 text-sm text-gray-700">
+        @for (item of thirdLinks(); track item.name) {
+        <li><a routerLink="{{item.url}}"> {{item.name}} </a></li>
+        }
+      </ul>
+    </div>
+
+    <!-- Apps -->
+    <div class="flex flex-col items-center justify-center space-y-2">
+      <a class="border-secondary rounded-xl border-2 p-3 hover:cursor-pointer">
+        <img src="./appStore.png" alt="Apps" class="w-32" />
+      </a>
+      <a class="border-secondary rounded-xl border-2 p-3 hover:cursor-pointer">
+        <img src="./playStore.png" alt="Apps" class="w-32" />
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div
+    class="from-primary to-secondary bg-gradient-to-r py-4 text-sm text-white"
+  >
+    <div class="mx-auto flex flex-row items-center justify-between gap-4 px-4">
+      <p>Copyright &#64; {{currentYear}}, Bogomatch.com. All Rights Reserved</p>
+      <div class="flex space-x-2">
+        @for (image of images(); track image) {
+        <img src="{{image}}" alt="Image" class="h-7 rounded" />
+        }
+      </div>
+    </div>
+  </div>
+</footer>
