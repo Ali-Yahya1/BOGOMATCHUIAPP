@@ -1,17 +1,17 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { Navbar } from "../navbar/navbar";
-import { Footer } from "../footer/footer";
+import { Navbar } from "@components/navbar/navbar";
+import { Footer } from "@components/footer/footer";
 
 @Component({
-  selector: "app-signup",
+  selector: "app-signin",
   imports: [RouterLink, Footer, Navbar],
-  templateUrl: "./signup.html",
-  styleUrl: "./signup.css",
+  templateUrl: "./signin.html",
+  styleUrl: "./signin.css",
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class SignUp
+export class SignIn
 {
 
 }
