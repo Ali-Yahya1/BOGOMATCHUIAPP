@@ -1,4 +1,4 @@
-import { Component, signal } from "@angular/core";
+import { Component } from "@angular/core";
 import { NgClass } from "@angular/common";
 
 // Link Interface
@@ -10,8 +10,8 @@ interface Link
   selected: boolean;
 }
 
-// Dashboard Links
-const links: Link[] =
+// Sidebar Links
+const sidebarlinks: Link[] =
   [
     {
       name: "Dashboard",
@@ -33,6 +33,29 @@ const links: Link[] =
     }
   ];
 
+// Dropdown Links
+const dropdownLinks: Link[] =
+  [
+    {
+      name: "Edit Profile",
+      icon: "user-edit",
+      url: "/edit-profile",
+      selected: false
+    },
+    {
+      name: "View Profile",
+      icon: "id-badge",
+      url: "/profile",
+      selected: false
+    },
+    {
+      name: "Logout",
+      icon: "sign-out-alt",
+      url: "/logout",
+      selected: false
+    }
+  ];
+
 @Component({
   selector: "app-dashboard",
   imports: [NgClass],
@@ -45,7 +68,8 @@ export class Dashboard
   sidebarOpen = false;
   isDropdownOpen = false;
 
-  links = signal(links);
+  sidebarLinks = sidebarlinks;
+  dropdownLinks = dropdownLinks;
 
   toggleDropdown()
   {

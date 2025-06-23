@@ -16,7 +16,7 @@
 
     <!-- Aside Links -->
     <ul class="mt-8 space-y-2 tracking-wide">
-      @for (item of links(); track item) { @if (item.selected) {
+      @for (item of sidebarLinks; track item) { @if (item.selected) {
       <li>
         <a
           href="{{item.url}}"
@@ -63,11 +63,12 @@
       <div class="relative">
         <button
           id="dropdown-button"
-          class="flex h-16 w-16 items-center justify-center hover:cursor-pointer"
+          class="mx-4 flex h-14 items-center justify-center rounded-3xl px-2 hover:cursor-pointer hover:bg-gray-50"
           (click)="toggleDropdown(); $event.stopPropagation()"
         >
+          John Doe
           <i
-            class="fas fa-user rounded-full border-2 border-gray-700 p-2 text-gray-700 hover:bg-gray-50"
+            class="fas fa-user ml-2 rounded-full border-2 border-gray-700 p-2 text-gray-700 hover:bg-gray-50"
           >
           </i>
         </button>
@@ -79,13 +80,16 @@
           (click)="$event.stopPropagation()"
         >
           <div class="p-2 py-2" role="menu">
+            @for (item of dropdownLinks; track item.name) {
             <a
+              href="{{item.url}}"
               class="flex cursor-pointer items-center justify-start rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
               role="menuitem"
             >
-              <i class="fas fa-sign-out-alt mr-2 text-gray-700"></i>
-              Logout
+              <i class="fas fa-{{item.icon}} mr-2 text-gray-700"></i>
+              {{item.name}}
             </a>
+            }
           </div>
         </div>
       </div>
