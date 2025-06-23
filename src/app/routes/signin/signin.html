@@ -43,10 +43,10 @@
       <div class="relative my-2 w-full bg-inherit">
         <input
           type="email"
-          id="email"
           name="email"
           class="peer focus:ring-primary focus:border-primary h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 ring-gray-300 focus:outline-none"
           placeholder=""
+          [(ngModel)]="email"
         />
         <label
           for="email"
@@ -60,10 +60,10 @@
       <div class="relative my-2 w-full bg-inherit">
         <input
           [type]="type"
-          id="password"
           name="password"
           class="peer focus:ring-primary focus:border-primary h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 ring-gray-300 focus:outline-none"
           placeholder=""
+          [(ngModel)]="password"
         />
         <label
           for="password"
