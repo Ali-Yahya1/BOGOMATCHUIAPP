@@ -1,8 +1,9 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { RouterLink } from "@angular/router";
+import { NgClass } from "@angular/common";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
-import { NgClass } from "@angular/common";
+
 
 @Component({
   selector: "app-signup",
@@ -14,8 +15,8 @@ import { NgClass } from "@angular/common";
 
 export class SignUp
 {
-  type: string = 'password';
-  eyeIcon: string = 'fa-eye-slash';
+  type: string = "password";
+  eyeIcon: string = "fa-eye-slash";
   isText: boolean = false;
 
   togglePasswordVisibility()

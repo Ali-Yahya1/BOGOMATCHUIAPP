@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { RouterLink } from "@angular/router";
+import { NgClass } from "@angular/common";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 
 @Component({
   selector: "app-signin",
-  imports: [RouterLink, Footer, Navbar],
+  imports: [RouterLink, Footer, Navbar, NgClass],
   templateUrl: "./signin.html",
   styleUrl: "./signin.css",
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -13,5 +14,14 @@ import { Footer } from "@components/footer/footer";
 
 export class SignIn
 {
+  type: string = "password";
+  eyeIcon: string = "fa-eye-slash";
+  isText: boolean = false;
 
+  togglePasswordVisibility()
+  {
+    this.isText = !this.isText;
+    this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
+    this.isText ? this.type = "text" : this.type = "password";
+  }
 }

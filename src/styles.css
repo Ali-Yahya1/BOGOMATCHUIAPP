@@ -1,21 +1,23 @@
 @import "tailwindcss";
 
-@theme
-{
+@theme {
   --font-primary: "Roboto Variable", sans-serif;
 
-  --color-primary: #11527E;
-  --color-secondary: #187BBC;
+  --color-primary: #11527e;
+  --color-secondary: #187bbc;
 }
 
 html,
-body
-{
+body {
   height: 100%;
 }
 
-body
-{
+body {
   margin: 0;
-  font-family: "Roboto Variable", sans-serif
+  font-family: "Roboto Variable", sans-serif;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
 }
