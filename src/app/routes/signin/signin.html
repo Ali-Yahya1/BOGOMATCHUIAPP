@@ -82,38 +82,48 @@
 
       <!-- Check Box -->
       <div
-        class="font-primary flex items-center justify-center text-sm text-gray-700"
+        class="font-primary flex w-full items-center justify-between text-sm text-gray-700"
       >
-        <label
-          class="relative flex cursor-pointer items-center rounded-full p-3"
-          for="checkbox"
-          data-ripple-dark="true"
-        >
-          <input
-            type="checkbox"
-            class="before:content[''] peer border-blue-gray-200 before:bg-blue-gray-500 checked:border-secondary checked:bg-secondary checked:before:bg-secondary relative h-5 w-5 cursor-pointer appearance-none rounded-md border transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity hover:before:opacity-10"
-            id="keepMeLoggedIn"
-          />
-          <div
-            class="pointer-events-none absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100"
+        <div class="flex items-center justify-center">
+          <label
+            class="relative flex cursor-pointer items-center rounded-full p-3"
+            for="checkbox"
+            data-ripple-dark="true"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-3.5 w-3.5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              stroke="currentColor"
-              stroke-width="1"
+            <input
+              type="checkbox"
+              class="before:content[''] peer border-blue-gray-200 before:bg-blue-gray-500 checked:border-secondary checked:bg-secondary checked:before:bg-secondary relative h-5 w-5 cursor-pointer appearance-none rounded-md border transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity hover:before:opacity-10"
+              id="keepMeLoggedIn"
+            />
+            <div
+              class="pointer-events-none absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100"
             >
-              <path
-                fill-rule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </div>
-        </label>
-        <span> Keep me logged in </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-3.5 w-3.5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="1"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+          </label>
+          <span> Keep me logged in </span>
+        </div>
+        <div>
+          <a
+            routerLink="/forgot-password"
+            class="text-secondary hover:text-primary hover:cursor-pointer"
+          >
+            Forgot your password?
+          </a>
+        </div>
       </div>
 
       <!-- Button -->
@@ -144,7 +154,10 @@
       <!-- Link -->
       <span class="font-primary my-2 w-full text-center text-sm">
         Need an Account?
-        <a routerLink="/signup" class="text-secondary font-bold underline">
+        <a
+          routerLink="/signup"
+          class="text-secondary hover:text-primary font-bold underline"
+        >
           Join for Free
         </a>
       </span>
