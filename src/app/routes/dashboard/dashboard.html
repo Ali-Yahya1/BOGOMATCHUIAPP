@@ -1,0 +1,71 @@
+<aside
+  class="fixed top-0 z-10 flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]"
+  [ngClass]="{
+    'ml-[-100%]': !sidebarOpen,
+    'ml-0': sidebarOpen,
+    'lg:ml-0': true
+  }"
+>
+  <div>
+    <div
+      class="invisible -mx-6 mt-4 flex items-center justify-center px-6 py-4 lg:visible"
+    >
+      <a href="#" title="home">
+        <img src="./logo.png" class="w-32" alt="tailus logo" />
+      </a>
+    </div>
+
+    <!-- Aside Links -->
+    <ul class="mt-8 space-y-2 tracking-wide">
+      @for (item of links(); track item) { @if (item.selected) {
+      <li>
+        <a
+          href="{{item.url}}"
+          class="from-primary to-secondary hover:from-secondary relative flex items-center space-x-4 rounded-xl bg-gradient-to-r px-4 py-3 text-white transition-all"
+        >
+          <i class="fas fa-{{item.icon}}"></i>
+          <span class="font-primary -mr-1 font-medium">{{item.name}}</span>
+        </a>
+      </li>
+      } @else {
+      <li>
+        <a
+          href="{{item.url}}"
+          class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-500 transition-all hover:bg-gray-50"
+        >
+          <i class="fas fa-{{item.icon}} text-gray-700"></i>
+          <span class="group-hover:text-gray-700">{{item.name}}</span>
+        </a>
+      </li>
+      } }
+    </ul>
+  </div>
+
+  <div class="-mx-6 flex items-center justify-between border-t px-6 pt-4">
+    <button
+      class="group flex w-full items-center space-x-4 rounded-md px-4 py-3 text-gray-500 transition-all hover:cursor-pointer hover:bg-gray-50"
+    >
+      <i class="fas fa-sign-out-alt text-gray-700"></i>
+      <span class="group-hover:text-gray-700">Logout</span>
+    </button>
+  </div>
+</aside>
+
+<div class="mb-6 ml-auto lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+  <div class="sticky top-0 z-10 h-16 border-b bg-white lg:py-2.5">
+    <!-- Aside Button -->
+    <div class="flex items-center justify-between space-x-4 2xl:container">
+      <button
+        id="aside-toggle"
+        (click)="sidebarOpen = !sidebarOpen"
+        class="-mr-2 flex h-16 w-12 items-center justify-center border-r hover:cursor-pointer lg:hidden"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="px-6 pt-6 2xl:container">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+  </div>
+</div>
