@@ -39,15 +39,6 @@
       } }
     </ul>
   </div>
-
-  <div class="-mx-6 flex items-center justify-between border-t px-6 pt-4">
-    <button
-      class="group flex w-full items-center space-x-4 rounded-md px-4 py-3 text-gray-500 transition-all hover:cursor-pointer hover:bg-gray-50"
-    >
-      <i class="fas fa-sign-out-alt text-gray-700"></i>
-      <span class="group-hover:text-gray-700">Logout</span>
-    </button>
-  </div>
 </aside>
 
 <div
@@ -69,14 +60,35 @@
         <i class="fas fa-bars text-gray-700"></i>
       </button>
       <!-- User Image -->
-      <button
-        id="profile"
-        class="flex h-16 w-16 items-center justify-center hover:cursor-pointer"
-      >
-        <i
-          class="fas fa-user rounded-full border-2 border-gray-700 p-2 text-gray-700 hover:bg-gray-50"
-        ></i>
-      </button>
+      <div class="relative">
+        <button
+          id="dropdown-button"
+          class="flex h-16 w-16 items-center justify-center hover:cursor-pointer"
+          (click)="toggleDropdown(); $event.stopPropagation()"
+        >
+          <i
+            class="fas fa-user rounded-full border-2 border-gray-700 p-2 text-gray-700 hover:bg-gray-50"
+          >
+          </i>
+        </button>
+        <!-- Dropdown Menu -->
+        <div
+          id="dropdown-menu"
+          class="ring-opacity-5 absolute right-0 -mt-1 mr-4 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black"
+          [class.hidden]="!isDropdownOpen"
+          (click)="$event.stopPropagation()"
+        >
+          <div class="p-2 py-2" role="menu">
+            <a
+              class="flex cursor-pointer items-center justify-start rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+              role="menuitem"
+            >
+              <i class="fas fa-sign-out-alt mr-2 text-gray-700"></i>
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

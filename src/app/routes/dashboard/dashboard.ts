@@ -43,6 +43,32 @@ const links: Link[] =
 export class Dashboard
 {
   sidebarOpen = false;
+  isDropdownOpen = false;
 
   links = signal(links);
+
+  toggleDropdown()
+  {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  closeDropdown(event: Event)
+  {
+    const target = event.target as HTMLElement;
+    const button = document.getElementById("dropdown-button");
+    const menu = document.getElementById("dropdown-menu");
+    if (button && menu && !button.contains(target) && !menu.contains(target))
+    {
+      this.isDropdownOpen = false;
+    }
+  }
+
+  ngOnInit()
+  {
+    window.addEventListener("click", this.closeDropdown.bind(this));
+  }
+  ngOnDestroy()
+  {
+    window.removeEventListener("click", this.closeDropdown.bind(this));
+  }
 }
