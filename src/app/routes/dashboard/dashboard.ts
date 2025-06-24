@@ -1,6 +1,7 @@
 import { Component, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { NgClass } from "@angular/common";
+import { AuthService } from "@services/auth.service";
 import { UserStoreService } from "@services/userService.service";
 
 // Link Interface
@@ -49,12 +50,6 @@ const dropdownLinks: Link[] =
       icon: "id-badge",
       url: "/profile",
       selected: false
-    },
-    {
-      name: "Logout",
-      icon: "sign-out-alt",
-      url: "/logout",
-      selected: false
     }
   ];
 
@@ -67,6 +62,7 @@ const dropdownLinks: Link[] =
 
 export class Dashboard
 {
+  private auth = inject(AuthService);
   private userStore = inject(UserStoreService);
   name = "";
 
@@ -94,6 +90,12 @@ export class Dashboard
     {
       this.isDropdownOpen = false;
     }
+  }
+
+  // Logout
+  logout(): void
+  {
+    this.auth.signOut();
   }
 
   // On Mount

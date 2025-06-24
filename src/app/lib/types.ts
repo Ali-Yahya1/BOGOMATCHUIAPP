@@ -24,8 +24,8 @@ interface TokenAPI
 // Token
 interface Token
 {
-  name: string;
-  role: string;
+  Name: string;
+  Role: string;
 }
 
 export type { SignUpType, SignInType, TokenAPI, Token };

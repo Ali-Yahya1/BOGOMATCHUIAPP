@@ -78,24 +78,18 @@ export class AuthService
   }
 
   // Decode Token
-  decodeToken(): Token | null
-  {
-    const token: string | null = this.getToken();
-    let decoded: Token | null = null;
-
-    if (token)
-    {
-      try
-      {
-        decoded = this.jwtHelper.decodeToken(token) as Token;
-      }
-      catch (err)
-      {
-        console.error(`Invalid JWT Token: ${ err }`);
+  decodeToken() {
+    const token = this.getToken();
+    if (token) {
+      const jwtHelper = new JwtHelperService();
+      try {
+        return jwtHelper.decodeToken(token);
+      } catch (error) {
+        console.error('Invalid JWT token:', error);
+        return null;
       }
     }
-
-    return decoded;
+    return null;
   }
 
   // Get Name
@@ -103,7 +97,7 @@ export class AuthService
   {
     const decoded: Token | null = this.decodeToken();
 
-    return decoded ? decoded.name : null;
+    return decoded ? decoded.Name : null;
   }
 
   // Get Role
@@ -111,6 +105,6 @@ export class AuthService
   {
     const decoded: Token | null = this.decodeToken();
 
-    return decoded ? decoded.role : null;
+    return decoded ? decoded.Role : null;
   }
 }

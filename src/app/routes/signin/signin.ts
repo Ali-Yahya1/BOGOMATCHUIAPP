@@ -6,7 +6,7 @@ import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { AuthService } from "@services/auth.service";
 import { UserStoreService } from "@services/userService.service";
-import type { Token } from "@lib/types";
+import ValidateForm from "@app/Helper/ValidateForm";
 
 @Component({
   selector: "app-signin",
@@ -66,29 +66,29 @@ export class SignIn
             this.loginForm.reset();
             this.auth.storeToken(res.accessToken);
             this.auth.refreshToken(res.refreshToken);
-
-            const token: Token | null = this.auth.decodeToken();
-
-            if (token)
-            {
-              this.userStore.setName(token.name);
-              this.userStore.setRole(token.role);
-
-              if (token.role === "Admin")
-              {
-                this.router.navigate(["dashboard"]);
-              }
-              else
-              {
-                this.router.navigate([""]);
-              }
+            const tokenPayload  = this.auth.decodeToken();
+            this.userStore.setName(tokenPayload.Name);
+            this.userStore.setRole(tokenPayload.Role);
+            //this.toast.success("You have successfully loggedIn", "SUCCESS");
+            console.log(tokenPayload);
+            const name = tokenPayload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+            const role = tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+            this.userStore.setName(name);
+            this.userStore.setRole(role);
+            if(role === "Admin"){
+               this.router.navigate(['dashboard']);   
             }
-          },
-          error: (err) =>
-          {
-            console.log(err);
-          }
-        });
+            else{
+             this.router.navigate(['']);   
+            }
+         },
+        error:(err) => {
+          //this.toast.error("Something went wrong? please try again", "ERROR");
+        }
+      })
     }
-  }
+    else{
+      ValidateForm.validateAllFormFields(this.loginForm);
+      console.log("this is not valid");
+    }}
 }

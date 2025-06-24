@@ -15,8 +15,7 @@ export class UserStoreService
   }
 
   // Set Name
-  setName(name: string): void
-  {
+  setName(name:string){
     this.name$.next(name);
   }
 
@@ -27,7 +26,7 @@ export class UserStoreService
   }
 
   // Set Role
-  setRole(role: string): void
+  setRole(role: string)
   {
     this.role$.next(role);
   }
