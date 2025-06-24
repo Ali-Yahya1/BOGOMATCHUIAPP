@@ -11,18 +11,18 @@ export class AuthService
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  private baseURL: string = "";
+  private baseURL: string = "https://localhost:7066/api/User";
 
   // Sign Up
   signUp(userObj: SignUpType): Observable<Object>
   {
-    return this.http.post<Object>(`${ this.baseURL }/register`, userObj);
+    return this.http.post<Object>(`${ this.baseURL }/Register`, userObj);
   }
 
   // Sign In
   signIn(loginObj: SignInType): Observable<TokenAPI>
   {
-    return this.http.post<TokenAPI>(`${ this.baseURL }/login`, loginObj);
+    return this.http.post<TokenAPI>(`${ this.baseURL }/Login`, loginObj);
   }
 
   // Sign Out
