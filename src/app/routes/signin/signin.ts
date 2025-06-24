@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
-import { ToastrService } from "ngx-toastr";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { AuthService } from "@services/auth.service";
@@ -19,7 +18,6 @@ export class SignIn
 {
   private router = inject(Router);
   private auth = inject(AuthService);
-  private toast = inject(ToastrService);
 
   // Password Eye
   type: string = "password";
@@ -71,12 +69,11 @@ export class SignIn
             this.loginForm.reset();
             this.auth.storeToken(res.accessToken);
             this.auth.refreshToken(res.refreshToken);
-            this.toast.success("Login Successful", "SUCCESS");
             this.router.navigate(["dashboard"]);
           },
           error: (err) =>
           {
-            this.toast.error("Please Try Later...", "ERROR");
+            console.log(err);
           }
         });
     }
