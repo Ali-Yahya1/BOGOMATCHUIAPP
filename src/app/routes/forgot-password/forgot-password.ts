@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angula
 import { NgClass } from "@angular/common";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
-import { AuthService } from "@services/auth.service";
+import { ResetPasswordService } from "@app/services/resetPassword.service";
 
 @Component({
   selector: "app-forgot-password",
@@ -16,7 +16,7 @@ import { AuthService } from "@services/auth.service";
 export class ForgotPassword
 {
   private router = inject(Router);
-  private auth = inject(AuthService);
+  private resetService = inject(ResetPasswordService);
 
   // Inputs
   theForm: FormGroup = new FormGroup({
@@ -41,7 +41,19 @@ export class ForgotPassword
   {
     if (this.theForm.valid)
     {
-
+      this.resetService.sendResetPasswordLink(this.theForm.value["email"]).subscribe(
+        {
+          next: (res) =>
+          {
+            // Toaster Message
+            this.router.navigate(["signin"]);
+          },
+          error: (err) =>
+          {
+            console.log(err);
+          }
+        }
+      );
     }
   }
 }

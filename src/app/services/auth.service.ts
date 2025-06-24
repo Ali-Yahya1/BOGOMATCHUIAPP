@@ -11,7 +11,6 @@ export class AuthService
 {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private jwtHelper = new JwtHelperService();
 
   private baseURL: string = "https://localhost:7066/api/User";
 
@@ -78,13 +77,17 @@ export class AuthService
   }
 
   // Decode Token
-  decodeToken() {
+  decodeToken()
+  {
     const token = this.getToken();
-    if (token) {
+    if (token)
+    {
       const jwtHelper = new JwtHelperService();
-      try {
+      try
+      {
         return jwtHelper.decodeToken(token);
-      } catch (error) {
+      } catch (error)
+      {
         console.error('Invalid JWT token:', error);
         return null;
       }
