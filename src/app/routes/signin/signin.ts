@@ -5,6 +5,8 @@ import { NgClass } from "@angular/common";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { AuthService } from "@services/auth.service";
+import { UserStoreService } from "@services/userService.service";
+import type { Token } from "@lib/types";
 
 @Component({
   selector: "app-signin",
@@ -18,6 +20,7 @@ export class SignIn
 {
   private router = inject(Router);
   private auth = inject(AuthService);
+  private userStore = inject(UserStoreService);
 
   // Password Eye
   type: string = "password";
@@ -64,15 +67,21 @@ export class SignIn
             this.auth.storeToken(res.accessToken);
             this.auth.refreshToken(res.refreshToken);
 
-            const role: string | null = this.auth.getRole();
+            const token: Token | null = this.auth.decodeToken();
 
-            if (role && role === "Admin")
+            if (token)
             {
-              this.router.navigate(["dashboard"]);
-            }
-            else if (role && role === "Guest")
-            {
-              this.router.navigate([""]);
+              this.userStore.setName(token.name);
+              this.userStore.setRole(token.role);
+
+              if (token.role === "Admin")
+              {
+                this.router.navigate(["dashboard"]);
+              }
+              else
+              {
+                this.router.navigate([""]);
+              }
             }
           },
           error: (err) =>

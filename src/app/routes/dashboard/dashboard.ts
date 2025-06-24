@@ -1,5 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
+import { RouterLink } from "@angular/router";
 import { NgClass } from "@angular/common";
+import { UserStoreService } from "@services/userService.service";
 
 // Link Interface
 interface Link
@@ -58,39 +60,54 @@ const dropdownLinks: Link[] =
 
 @Component({
   selector: "app-dashboard",
-  imports: [NgClass],
+  imports: [RouterLink, NgClass],
   templateUrl: "./dashboard.html",
   styleUrl: "./dashboard.css"
 })
 
 export class Dashboard
 {
+  private userStore = inject(UserStoreService);
+  name = "";
+
+  // Sidebar & Dropdown
   sidebarOpen = false;
   isDropdownOpen = false;
 
   sidebarLinks = sidebarlinks;
   dropdownLinks = dropdownLinks;
 
+  // Toggle Dropdown
   toggleDropdown()
   {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
+  // Close Dropdown
   closeDropdown(event: Event)
   {
-    const target = event.target as HTMLElement;
-    const button = document.getElementById("dropdown-button");
-    const menu = document.getElementById("dropdown-menu");
+    const target: HTMLElement = event.target as HTMLElement;
+    const button: HTMLElement | null = document.getElementById("dropdown-button");
+    const menu: HTMLElement | null = document.getElementById("dropdown-menu");
+
     if (button && menu && !button.contains(target) && !menu.contains(target))
     {
       this.isDropdownOpen = false;
     }
   }
 
+  // On Mount
   ngOnInit()
   {
     window.addEventListener("click", this.closeDropdown.bind(this));
+
+    this.userStore.getName().subscribe((val: string) =>
+    {
+      this.name = val;
+    });
   }
+
+  // On Destroy
   ngOnDestroy()
   {
     window.removeEventListener("click", this.closeDropdown.bind(this));

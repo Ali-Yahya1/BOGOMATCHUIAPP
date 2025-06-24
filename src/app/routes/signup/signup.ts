@@ -6,7 +6,6 @@ import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { AuthService } from "@services/auth.service";
 
-
 @Component({
   selector: "app-signup",
   imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer],
