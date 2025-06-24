@@ -1,13 +1,13 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { RouterLink } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
+import { Router, RouterLink } from "@angular/router";
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 
 @Component({
   selector: "app-signin",
-  imports: [RouterLink, Footer, Navbar, NgClass, FormsModule],
+  imports: [RouterLink, Footer, Navbar, NgClass, ReactiveFormsModule],
   templateUrl: "./signin.html",
   styleUrl: "./signin.css",
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -15,17 +15,53 @@ import { Footer } from "@components/footer/footer";
 
 export class SignIn
 {
+  // Password Eye
   type: string = "password";
   eyeIcon: string = "fa-eye-slash";
   isText: boolean = false;
 
-  togglePasswordVisibility()
+  // Password Eye Toggler
+  togglePasswordVisibility(): void
   {
     this.isText = !this.isText;
     this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
     this.isText ? this.type = "text" : this.type = "password";
   }
 
-  email: string = "";
-  password: string = "";
+  // Inputs
+  loginForm: FormGroup = new FormGroup({
+    email: new FormControl("", [Validators.required, Validators.email]),
+    password: new FormControl("", [Validators.required, Validators.minLength(5)])
+  });
+
+  // Router
+  private router = inject(Router);
+
+  // Email Getter
+  email(): string | null
+  {
+    return this.loginForm.get("email") as string | null;
+  }
+
+  // Validate
+  validate(name: string): boolean
+  {
+    if (this.loginForm.get(name)?.touched && this.loginForm.get(name)?.invalid)
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+
+  // On Submit
+  onSubmit(): void
+  {
+    if (this.loginForm.valid)
+    {
+      this.router.navigate(["/dashboard"]);
+    }
+  }
 }
