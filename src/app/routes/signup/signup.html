@@ -32,90 +32,161 @@
   <!-- Right Box -->
   <div class="col-span-1 px-20 py-12">
     <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
       class="flex h-full w-full flex-col items-start justify-center rounded-3xl bg-gray-50 p-6"
     >
       <h1 class="font-primary my-2 w-full text-4xl">Sign Up</h1>
-      <p class="font-primary my-2 w-full text-gray-700">
+      <p class="font-primary mt-2 mb-4 w-full text-gray-700">
         Please sign up to continue to your account
       </p>
 
       <!-- Name -->
-      <div class="relative my-2 w-full bg-inherit">
+      <div class="relative my-1 w-full bg-inherit">
         <input
           type="text"
           id="name"
-          name="name"
-          class="peer focus:ring-primary focus:border-primary h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 ring-gray-300 focus:outline-none"
+          formControlName="name"
           placeholder=""
-        />
-        <label
-          for="name"
-          class="peer-focus:text-primary absolute -top-3 left-0 mx-1 cursor-text bg-inherit px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-3 peer-focus:text-sm"
-        >
-          Name
-        </label>
-      </div>
-
-      <!-- Date of Birth -->
-      <div class="relative my-2 w-full bg-inherit">
-        <input
-          type="date"
-          id="dob"
-          name="dob"
-          class="peer focus:ring-primary focus:border-primary h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 ring-gray-300 focus:outline-none"
-          placeholder=""
+          class="peer h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 focus:outline-none"
+          [ngClass]="{
+            'focus:ring-primary focus:border-primary ring-gray-300': validate('name'),
+            'focus:ring-red-500 focus:border-red-500 ring-red-500': !validate('name')
+          }"
         />
         <label
           for="dob"
-          class="peer-focus:text-primary absolute -top-3 left-0 mx-1 cursor-text bg-inherit px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-3 peer-focus:text-sm"
+          class="absolute -top-3 left-0 mx-1 cursor-text bg-inherit px-2 text-xs transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-focus:-top-3 peer-focus:text-sm"
+          [ngClass]="{
+            'peer-focus:text-primary text-gray-500 peer-placeholder-shown:text-gray-500': validate('name'),
+            'peer-focus:text-red-500 text-red-500 peer-placeholder-shown:text-red-500': !validate('name')
+          }"
+        >
+          Name
+        </label>
+        <p
+          class="my-1 w-full px-2 text-xs text-red-500"
+          [ngClass]="{
+            'invisible': validate('name'),
+            'visible': !validate('name')
+          }"
+        >
+          * Please enter a valid name
+        </p>
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="relative my-1 w-full bg-inherit">
+        <input
+          type="date"
+          id="dob"
+          formControlName="dob"
+          placeholder=""
+          class="peer h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 focus:outline-none"
+          [ngClass]="{
+            'focus:ring-primary focus:border-primary ring-gray-300': validate('dob'),
+            'focus:ring-red-500 focus:border-red-500 ring-red-500': !validate('dob')
+          }"
+        />
+        <label
+          for="dob"
+          class="absolute -top-3 left-0 mx-1 cursor-text bg-inherit px-2 text-xs transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-focus:-top-3 peer-focus:text-sm"
+          [ngClass]="{
+            'peer-focus:text-primary text-gray-500 peer-placeholder-shown:text-gray-500': validate('dob'),
+            'peer-focus:text-red-500 text-red-500 peer-placeholder-shown:text-red-500': !validate('dob')
+          }"
         >
           Date of Birth
         </label>
+        <p
+          class="my-1 w-full px-2 text-xs text-red-500"
+          [ngClass]="{
+            'invisible': validate('dob'),
+            'visible': !validate('dob')
+          }"
+        >
+          * Please select a valid date
+        </p>
       </div>
 
       <!-- Email -->
-      <div class="relative my-2 w-full bg-inherit">
+      <div class="relative my-1 w-full bg-inherit">
         <input
           type="email"
           id="email"
-          name="email"
-          class="peer focus:ring-primary focus:border-primary h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 ring-gray-300 focus:outline-none"
+          formControlName="email"
           placeholder=""
+          class="peer h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 focus:outline-none"
+          [ngClass]="{
+            'focus:ring-primary focus:border-primary ring-gray-300': validate('email'),
+            'focus:ring-red-500 focus:border-red-500 ring-red-500': !validate('email')
+          }"
         />
         <label
           for="email"
-          class="peer-focus:text-primary absolute -top-3 left-0 mx-1 cursor-text bg-inherit px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-3 peer-focus:text-sm"
+          class="absolute -top-3 left-0 mx-1 cursor-text bg-inherit px-2 text-xs transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-focus:-top-3 peer-focus:text-sm"
+          [ngClass]="{
+            'peer-focus:text-primary text-gray-500 peer-placeholder-shown:text-gray-500': validate('email'),
+            'peer-focus:text-red-500 text-red-500 peer-placeholder-shown:text-red-500': !validate('email')
+          }"
         >
           Email
         </label>
+        <p
+          class="my-1 w-full px-2 text-xs text-red-500"
+          [ngClass]="{
+            'invisible': validate('email'),
+            'visible': !validate('email')
+          }"
+        >
+          * Please enter a valid email
+        </p>
       </div>
 
       <!-- Password -->
-      <div class="relative my-2 w-full bg-inherit">
+      <div class="relative my-1 w-full bg-inherit">
         <input
           [type]="type"
           id="password"
-          name="password"
-          class="peer focus:ring-primary focus:border-primary h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 ring-gray-300 focus:outline-none"
+          formControlName="password"
           placeholder=""
+          class="peer h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 focus:outline-none"
+          [ngClass]="{
+            'focus:ring-primary focus:border-primary ring-gray-300': validate('password'),
+            'focus:ring-red-500 focus:border-red-500 ring-red-500': !validate('password')
+          }"
         />
         <label
           for="password"
-          class="peer-focus:text-primary absolute -top-3 left-0 mx-1 cursor-text bg-inherit px-2 text-xs text-gray-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-3 peer-focus:text-sm"
+          class="absolute -top-3 left-0 mx-1 cursor-text bg-inherit px-2 text-xs transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-focus:-top-3 peer-focus:text-sm"
+          [ngClass]="{
+            'peer-focus:text-primary text-gray-500 peer-placeholder-shown:text-gray-500': validate('password'),
+            'peer-focus:text-red-500 text-red-500 peer-placeholder-shown:text-red-500': !validate('password')
+          }"
         >
           Password
         </label>
         <!-- Eye icon -->
         <span
-          class="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-gray-500"
+          class="absolute top-1/3 right-3 -translate-y-1/2 cursor-pointer text-gray-500"
           (click)="togglePasswordVisibility()"
         >
           <i class="fa" [ngClass]="eyeIcon"></i>
         </span>
+        <p
+          class="my-1 w-full px-2 text-xs text-red-500"
+          [ngClass]="{
+            'invisible': validate('password'),
+            'visible': !validate('password')
+          }"
+        >
+          * Please enter a valid password
+        </p>
       </div>
 
       <!-- Button -->
       <button
+        type="submit"
         class="from-primary to-secondary font-primary hover:from-secondary my-2 w-full rounded-full bg-gradient-to-r p-2 text-sm text-white transition-all hover:cursor-pointer"
       >
         Sign up

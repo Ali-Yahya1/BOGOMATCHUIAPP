@@ -1,13 +1,15 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { RouterLink } from "@angular/router";
+import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
+import { Router, RouterLink } from "@angular/router";
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
+import { AuthService } from "@services/auth.service";
 
 
 @Component({
   selector: "app-signup",
-  imports: [RouterLink, Footer, Navbar, NgClass],
+  imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer],
   templateUrl: "./signup.html",
   styleUrl: "./signup.css",
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -15,15 +17,60 @@ import { Footer } from "@components/footer/footer";
 
 export class SignUp
 {
+  private router = inject(Router);
+  private auth = inject(AuthService);
+
+  // Password Eye
   type: string = "password";
   eyeIcon: string = "fa-eye-slash";
   isText: boolean = false;
 
-  togglePasswordVisibility()
+  // Password Eye Toggler
+  togglePasswordVisibility(): void
   {
     this.isText = !this.isText;
     this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
     this.isText ? this.type = "text" : this.type = "password";
   }
 
+  // Inputs
+  registerForm: FormGroup = new FormGroup({
+    name: new FormControl("", [Validators.required, Validators.minLength(5)]),
+    dob: new FormControl("", [Validators.required]),
+    email: new FormControl("", [Validators.required, Validators.email]),
+    password: new FormControl("", [Validators.required, Validators.minLength(5)])
+  });
+
+  // Validate
+  validate(name: string): boolean
+  {
+    if (this.registerForm.get(name)?.touched && this.registerForm.get(name)?.invalid)
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+
+  // On Submit
+  onSubmit(): void
+  {
+    if (this.registerForm.valid)
+    {
+      this.auth.signUp(this.registerForm.value)
+        .subscribe({
+          next: (res) =>
+          {
+            this.registerForm.reset();
+            this.router.navigate(["signin"]);
+          },
+          error: (err) =>
+          {
+            console.log(err);
+          }
+        });
+    }
+  }
 }

@@ -8,7 +8,7 @@ import { AuthService } from "@services/auth.service";
 
 @Component({
   selector: "app-signin",
-  imports: [RouterLink, Footer, Navbar, NgClass, ReactiveFormsModule],
+  imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer],
   templateUrl: "./signin.html",
   styleUrl: "./signin.css",
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -37,12 +37,6 @@ export class SignIn
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required, Validators.minLength(5)])
   });
-
-  // Email Getter
-  email(): string | null
-  {
-    return this.loginForm.get("email") as string | null;
-  }
 
   // Validate
   validate(name: string): boolean
