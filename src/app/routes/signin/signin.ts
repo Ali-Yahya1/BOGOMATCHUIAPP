@@ -63,7 +63,17 @@ export class SignIn
             this.loginForm.reset();
             this.auth.storeToken(res.accessToken);
             this.auth.refreshToken(res.refreshToken);
-            this.router.navigate(["dashboard"]);
+
+            const role: string | null = this.auth.getRole();
+
+            if (role && role === "Admin")
+            {
+              this.router.navigate(["dashboard"]);
+            }
+            else if (role && role === "Guest")
+            {
+              this.router.navigate([""]);
+            }
           },
           error: (err) =>
           {

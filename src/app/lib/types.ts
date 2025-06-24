@@ -21,4 +21,11 @@ interface TokenAPI
   refreshToken: string;
 }
 
-export type { SignUpType, SignInType, TokenAPI };
+// Token
+interface Token
+{
+  name: string;
+  role: string;
+}
+
+export type { SignUpType, SignInType, TokenAPI, Token };
