@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angula
 import { NgClass } from "@angular/common";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
+import { AuthService } from "@services/auth.service";
 
 @Component({
   selector: "app-signin",
@@ -15,6 +16,9 @@ import { Footer } from "@components/footer/footer";
 
 export class SignIn
 {
+  private router = inject(Router);
+  private auth = inject(AuthService);
+
   // Password Eye
   type: string = "password";
   eyeIcon: string = "fa-eye-slash";
@@ -33,9 +37,6 @@ export class SignIn
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required, Validators.minLength(5)])
   });
-
-  // Router
-  private router = inject(Router);
 
   // Email Getter
   email(): string | null
@@ -61,7 +62,20 @@ export class SignIn
   {
     if (this.loginForm.valid)
     {
-      this.router.navigate(["/dashboard"]);
+      this.auth.signIn(this.loginForm.value)
+        .subscribe({
+          next: (res) =>
+          {
+            this.loginForm.reset();
+            this.auth.storeToken(res.accessToken);
+            this.auth.refreshToken(res.refreshToken);
+            this.router.navigate(["dashboard"]);
+          },
+          error: (err) =>
+          {
+            console.log(err);
+          }
+        });
     }
   }
 }
