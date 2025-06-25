@@ -45,7 +45,7 @@ export class ForgotPassword
         {
           next: (res) =>
           {
-            // Toaster Message
+            // Toast Success Message Here
             this.router.navigate(["signin"]);
           },
           error: (err) =>

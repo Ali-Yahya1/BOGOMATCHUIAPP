@@ -4,8 +4,8 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angula
 import { NgClass } from "@angular/common";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
-import { ResetPasswordService } from "@app/services/resetPassword.service";
-import { resetPassword } from "@app/Models/reset-password.model";
+import { ResetPasswordService } from "@services/resetPassword.service";
+import type { ResetPasswordAPI } from "@lib/types";
 
 @Component({
   selector: "app-reset-password",
@@ -41,7 +41,6 @@ export class ResetPassword implements OnInit
   {
     this.route.queryParamMap.subscribe((params) =>
     {
-      console.log(params);
       this.email = params.get("email");
       this.emailToken = params.get("code");
     });
@@ -69,27 +68,28 @@ export class ResetPassword implements OnInit
   // On Submit
   onSubmit(): void
   {
-    if (this.theForm.valid && this.theForm.value["password"] === this.theForm.value["repassword"])
+    if (this.theForm.valid && this.theForm.value["password"] === this.theForm.value["repassword"] && this.email && this.emailToken)
     {
-      const obj: resetPassword =
+      const obj: ResetPasswordAPI =
       {
-        email: this.email || "",
-        emailToken: this.emailToken || "",
+        email: this.email,
+        emailToken: this.emailToken,
         newPassword: this.theForm.value["password"],
         confirmPassword: this.theForm.value["repassword"]
       };
-      console.log(obj);
-      // this.resetService.resetPassword(obj).subscribe(
-      //   {
-      //     next: (res) =>
-      //     {
-      //       this.router.navigate(["signin"]);
-      //     },
-      //     error: (err) =>
-      //     {
-      //       console.log("Error");
-      //     }
-      //   });
+
+      this.resetService.resetPassword(obj).subscribe(
+        {
+          next: (res) =>
+          {
+            // Toast Success Message Here
+            this.router.navigate(["signin"]);
+          },
+          error: (err) =>
+          {
+            console.log("Error");
+          }
+        });
     }
   }
 }

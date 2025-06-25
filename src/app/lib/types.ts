@@ -21,4 +21,13 @@ interface TokenAPI
   refreshToken: string;
 }
 
-export type { SignUpType, SignInType, TokenAPI };
+// Reset Password API
+interface ResetPasswordAPI
+{
+  email: string;
+  emailToken: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export type { SignUpType, SignInType, TokenAPI, ResetPasswordAPI };
