@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import type { Observable } from "rxjs";
 import type { SignUpType, SignInType, TokenAPI } from "@lib/types";
+import { TokenApiModel } from "@app/Models/token-api.model";
 
 @Injectable({ providedIn: "root" })
 
@@ -97,5 +98,9 @@ export class AuthService
     }
 
     return null;
+  }
+
+  renewToken(tokenApi: TokenApiModel) {
+    return this.http.post<any>(`${this.baseURL}refresh`, tokenApi);
   }
 }

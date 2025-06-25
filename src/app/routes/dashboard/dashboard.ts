@@ -55,9 +55,11 @@ const dropdownLinks: Link[] =
 @Component({
   selector: "app-dashboard",
   imports: [NgClass],
+  standalone: true,
   templateUrl: "./dashboard.html",
   styleUrl: "./dashboard.css"
 })
+
 
 export class Dashboard
 {
