@@ -2,6 +2,7 @@ import { Component, inject } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
+import { HotToastService } from "@ngxpert/hot-toast";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { ResetPasswordService } from "@app/services/resetPassword.service";
@@ -17,6 +18,7 @@ export class ForgotPassword
 {
   private router = inject(Router);
   private resetService = inject(ResetPasswordService);
+  private toaster = inject(HotToastService);
 
   // Inputs
   theForm: FormGroup = new FormGroup({
@@ -43,14 +45,14 @@ export class ForgotPassword
     {
       this.resetService.sendResetPasswordLink(this.theForm.value["email"]).subscribe(
         {
-          next: (res) =>
+          next: () =>
           {
-            // Toast Success Message Here
+            this.toaster.success("We've sent a password reset email to your account. Please check your inbox.");
             this.router.navigate(["signin"]);
           },
-          error: (err) =>
+          error: () =>
           {
-            console.log(err);
+            this.toaster.warning("Something went wrong. Please try again later.");
           }
         }
       );

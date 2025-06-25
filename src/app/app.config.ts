@@ -2,6 +2,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessC
 import { provideRouter } from "@angular/router";
 import { routes } from "@app/app.routes";
 import { provideHttpClient, withFetch } from "@angular/common/http";
+import { provideHotToastConfig } from "@ngxpert/hot-toast";
 
 export const appConfig: ApplicationConfig =
 {
@@ -10,6 +11,7 @@ export const appConfig: ApplicationConfig =
       provideBrowserGlobalErrorListeners(),
       provideZonelessChangeDetection(),
       provideRouter(routes),
-      provideHttpClient(withFetch())
+      provideHttpClient(withFetch()),
+      provideHotToastConfig({ dismissible: true, position: "top-center", duration: 3000 })
     ]
 };
