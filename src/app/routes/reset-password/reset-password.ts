@@ -6,7 +6,7 @@ import { HotToastService } from "@ngxpert/hot-toast";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { ResetPasswordService } from "@services/resetPassword.service";
-import type { ResetPasswordAPI } from "@lib/types";
+import type { ResetPasswordAPI } from "@app/lib/types";
 import validateForm from "@lib/validateForm";
 
 @Component({
@@ -71,28 +71,35 @@ export class ResetPassword implements OnInit
   // On Submit
   onSubmit(): void
   {
-    if (this.theForm.valid && this.theForm.value["password"] === this.theForm.value["repassword"] && this.email && this.emailToken)
+    if (this.theForm.valid && this.email && this.emailToken)
     {
-      const obj: ResetPasswordAPI =
+      if (this.theForm.value["password"] === this.theForm.value["repassword"])
       {
-        email: this.email,
-        emailToken: this.emailToken,
-        newPassword: this.theForm.value["password"],
-        confirmPassword: this.theForm.value["repassword"]
-      };
-
-      this.resetService.resetPassword(obj).subscribe(
+        const obj: ResetPasswordAPI =
         {
-          next: () =>
+          email: this.email,
+          emailToken: this.emailToken,
+          newPassword: this.theForm.value["password"],
+          confirmPassword: this.theForm.value["repassword"]
+        };
+
+        this.resetService.resetPassword(obj).subscribe(
           {
-            this.toaster.success("Password reset successfully.");
-            this.router.navigate(["signin"]);
-          },
-          error: () =>
-          {
-            this.toaster.error("Something went wrong. Please try again later.");
-          }
-        });
+            next: () =>
+            {
+              this.toaster.success("Password reset successfully.");
+              this.router.navigate(["signin"]);
+            },
+            error: () =>
+            {
+              this.toaster.error("Something went wrong. Please try again later.");
+            }
+          });
+      }
+      else
+      {
+        this.toaster.error("Passwords should match.");
+      }
     }
     else
     {

@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import type { ResetPasswordAPI } from "@lib/types";
+import type { ResetPasswordAPI } from "@app/lib/types";
 
 @Injectable({ providedIn: "root" })
 
