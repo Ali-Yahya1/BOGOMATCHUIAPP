@@ -1,5 +1,4 @@
 import { Component, inject } from "@angular/core";
-import { RouterLink } from "@angular/router";
 import { NgClass } from "@angular/common";
 import { AuthService } from "@services/auth.service";
 import { UserStoreService } from "@services/userService.service";
@@ -55,7 +54,7 @@ const dropdownLinks: Link[] =
 
 @Component({
   selector: "app-dashboard",
-  imports: [RouterLink, NgClass],
+  imports: [NgClass],
   templateUrl: "./dashboard.html",
   styleUrl: "./dashboard.css"
 })

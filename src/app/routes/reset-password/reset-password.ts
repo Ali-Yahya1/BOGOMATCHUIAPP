@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from "@angular/core";
-import { Router, RouterLink, ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
 import { Navbar } from "@components/navbar/navbar";
@@ -9,7 +9,7 @@ import type { ResetPasswordAPI } from "@lib/types";
 
 @Component({
   selector: "app-reset-password",
-  imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer],
+  imports: [NgClass, ReactiveFormsModule, Navbar, Footer],
   templateUrl: "./reset-password.html",
   styleUrl: "./reset-password.css"
 })
