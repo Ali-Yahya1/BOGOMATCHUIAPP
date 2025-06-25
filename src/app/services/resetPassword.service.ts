@@ -17,7 +17,7 @@ export class ResetPasswordService
   }
 
   // Reset Password Link
-  resetPassword(resetPasswordObj: ResetPasswordAPI)
+  resetPassword(resetPasswordObj)
   {
     return this.http.post<any>(`${ this.baseUrl }/Reset-Password/`, resetPasswordObj);
   }

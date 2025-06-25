@@ -73,12 +73,12 @@ export class ResetPassword implements OnInit
   {
     if (this.theForm.valid && this.theForm.value["password"] === this.theForm.value["repassword"] && this.email && this.emailToken)
     {
-      const obj: ResetPasswordAPI =
+      const obj =
       {
-        email: this.email,
-        emailToken: this.emailToken,
-        newPassword: this.theForm.value["password"],
-        confirmPassword: this.theForm.value["repassword"]
+        Email: this.email,
+        EmailToken: this.emailToken,
+        NewPassword: this.theForm.value["password"],
+        ConfirmPassword: this.theForm.value["repassword"]
       };
 
       this.resetService.resetPassword(obj).subscribe(
