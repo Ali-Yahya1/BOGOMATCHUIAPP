@@ -1,7 +1,8 @@
 // Sign Up Type
 interface SignUpType
 {
-  name: string;
+  firstName: string;
+  lastName: string;
   dob: string;
   email: string;
   password: string;

@@ -38,7 +38,7 @@ export class SignUp
   // Inputs
   registerForm: FormGroup = new FormGroup({
     firstName: new FormControl("", [Validators.required]),
-    secondName: new FormControl("", [Validators.required]),
+    lastName: new FormControl("", [Validators.required]),
     dob: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required])
