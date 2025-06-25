@@ -2,10 +2,12 @@ import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
+import { HotToastService } from "@ngxpert/hot-toast";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { AuthService } from "@services/auth.service";
 import { UserStoreService } from "@services/userService.service";
+import validateForm from "@lib/validateForm";
 
 @Component({
   selector: "app-signin",
@@ -20,6 +22,7 @@ export class SignIn
   private router = inject(Router);
   private auth = inject(AuthService);
   private userStore = inject(UserStoreService);
+  private toaster = inject(HotToastService);
 
   // Password Eye
   type: string = "password";
@@ -76,7 +79,7 @@ export class SignIn
               this.userStore.setName(name);
               this.userStore.setRole(role);
 
-              // Toast Success Message Here
+              this.toaster.success("Signed in successfully");
 
               if (role === "Admin")
               {
@@ -88,11 +91,15 @@ export class SignIn
               }
             }
           },
-          error: (err) =>
+          error: () =>
           {
-            // Toast Error Message Here
+            this.toaster.error("Something went wrong. Please try again later.");
           }
         });
+    }
+    else
+    {
+      validateForm(this.loginForm);
     }
   }
 }

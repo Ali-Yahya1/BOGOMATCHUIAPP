@@ -2,10 +2,12 @@ import { Component, inject, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
+import { HotToastService } from "@ngxpert/hot-toast";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { ResetPasswordService } from "@services/resetPassword.service";
 import type { ResetPasswordAPI } from "@lib/types";
+import validateForm from "@lib/validateForm";
 
 @Component({
   selector: "app-reset-password",
@@ -19,6 +21,7 @@ export class ResetPassword implements OnInit
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private resetService = inject(ResetPasswordService);
+  private toaster = inject(HotToastService);
 
   email: string | null = "";
   emailToken: string | null = "";
@@ -80,16 +83,20 @@ export class ResetPassword implements OnInit
 
       this.resetService.resetPassword(obj).subscribe(
         {
-          next: (res) =>
+          next: () =>
           {
-            // Toast Success Message Here
+            this.toaster.success("Password reset successfully.");
             this.router.navigate(["signin"]);
           },
-          error: (err) =>
+          error: () =>
           {
-            console.log("Error");
+            this.toaster.error("Something went wrong. Please try again later.");
           }
         });
+    }
+    else
+    {
+      validateForm(this.theForm);
     }
   }
 }

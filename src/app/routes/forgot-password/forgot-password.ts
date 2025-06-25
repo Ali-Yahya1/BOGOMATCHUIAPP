@@ -5,7 +5,8 @@ import { NgClass } from "@angular/common";
 import { HotToastService } from "@ngxpert/hot-toast";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
-import { ResetPasswordService } from "@app/services/resetPassword.service";
+import { ResetPasswordService } from "@services/resetPassword.service";
+import validateForm from "@lib/validateForm";
 
 @Component({
   selector: "app-forgot-password",
@@ -52,10 +53,14 @@ export class ForgotPassword
           },
           error: () =>
           {
-            this.toaster.warning("Something went wrong. Please try again later.");
+            this.toaster.error("Something went wrong. Please try again later.");
           }
         }
       );
+    }
+    else
+    {
+      validateForm(this.theForm);
     }
   }
 }

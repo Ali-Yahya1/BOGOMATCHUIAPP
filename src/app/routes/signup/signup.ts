@@ -2,9 +2,11 @@ import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
+import { HotToastService } from "@ngxpert/hot-toast";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { AuthService } from "@services/auth.service";
+import validateForm from "@lib/validateForm";
 
 @Component({
   selector: "app-signup",
@@ -18,6 +20,7 @@ export class SignUp
 {
   private router = inject(Router);
   private auth = inject(AuthService);
+  private toaster = inject(HotToastService);
 
   // Password Eye
   type: string = "password";
@@ -61,17 +64,21 @@ export class SignUp
     {
       this.auth.signUp(this.registerForm.value)
         .subscribe({
-          next: (res) =>
+          next: () =>
           {
-            // Toaster Success Message
             this.registerForm.reset();
+            this.toaster.success("User account created successfully.");
             this.router.navigate(["signin"]);
           },
-          error: (err) =>
+          error: () =>
           {
-            console.log(err);
+            this.toaster.error("Something went wrong. Please try again later.");
           }
         });
+    }
+    else
+    {
+      validateForm(this.registerForm);
     }
   }
 }
