@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import type { Observable } from "rxjs";
-import type { SignUpType, SignInType, TokenAPI, Token } from "@lib/types";
+import type { SignUpType, SignInType, TokenAPI } from "@lib/types";
 
 @Injectable({ providedIn: "root" })
 
@@ -77,37 +77,25 @@ export class AuthService
   }
 
   // Decode Token
-  decodeToken()
+  decodeToken(): object | null
   {
-    const token = this.getToken();
+    const token: string | null = this.getToken();
+
     if (token)
     {
-      const jwtHelper = new JwtHelperService();
+      const jwtHelper: JwtHelperService = new JwtHelperService();
+
       try
       {
         return jwtHelper.decodeToken(token);
-      } catch (error)
+      }
+      catch (error)
       {
-        console.error('Invalid JWT token:', error);
+        console.error("Invalid JWT token:", error);
         return null;
       }
     }
+
     return null;
-  }
-
-  // Get Name
-  getName(): string | null
-  {
-    const decoded: Token | null = this.decodeToken();
-
-    return decoded ? decoded.Name : null;
-  }
-
-  // Get Role
-  getRole(): string | null
-  {
-    const decoded: Token | null = this.decodeToken();
-
-    return decoded ? decoded.Role : null;
   }
 }

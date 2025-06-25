@@ -21,11 +21,4 @@ interface TokenAPI
   refreshToken: string;
 }
 
-// Token
-interface Token
-{
-  Name: string;
-  Role: string;
-}
-
-export type { SignUpType, SignInType, TokenAPI, Token };
+export type { SignUpType, SignInType, TokenAPI };
