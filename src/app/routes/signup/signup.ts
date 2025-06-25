@@ -34,7 +34,8 @@ export class SignUp
 
   // Inputs
   registerForm: FormGroup = new FormGroup({
-    name: new FormControl("", [Validators.required]),
+    firstName: new FormControl("", [Validators.required]),
+    secondName: new FormControl("", [Validators.required]),
     dob: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required])
@@ -62,6 +63,7 @@ export class SignUp
         .subscribe({
           next: (res) =>
           {
+            // Toaster Success Message
             this.registerForm.reset();
             this.router.navigate(["signin"]);
           },

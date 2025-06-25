@@ -41,37 +41,71 @@
         Please sign up to continue to your account
       </p>
 
-      <!-- Name -->
+      <!-- First Name -->
       <div class="relative my-1 w-full bg-inherit">
         <input
           type="text"
-          id="name"
-          formControlName="name"
+          id="firstName"
+          formControlName="firstName"
           placeholder=""
           class="peer h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 focus:outline-none"
           [ngClass]="{
-            'focus:ring-primary focus:border-primary ring-gray-300': validate('name'),
-            'focus:ring-red-500 focus:border-red-500 ring-red-500': !validate('name')
+            'focus:ring-primary focus:border-primary ring-gray-300': validate('firstName'),
+            'focus:ring-red-500 focus:border-red-500 ring-red-500': !validate('firstName')
           }"
         />
         <label
-          for="dob"
+          for="firstName"
           class="absolute -top-3 left-0 mx-1 cursor-text bg-inherit px-2 text-xs transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-focus:-top-3 peer-focus:text-sm"
           [ngClass]="{
-            'peer-focus:text-primary text-gray-500 peer-placeholder-shown:text-gray-500': validate('name'),
-            'peer-focus:text-red-500 text-red-500 peer-placeholder-shown:text-red-500': !validate('name')
+            'peer-focus:text-primary text-gray-500 peer-placeholder-shown:text-gray-500': validate('firstName'),
+            'peer-focus:text-red-500 text-red-500 peer-placeholder-shown:text-red-500': !validate('firstName')
           }"
         >
-          Name
+          First Name
         </label>
         <p
           class="my-1 w-full px-2 text-xs text-red-500"
           [ngClass]="{
-            'invisible': validate('name'),
-            'visible': !validate('name')
+            'invisible': validate('firstName'),
+            'visible': !validate('firstName')
           }"
         >
-          * Please enter a valid name
+          * Please enter a valid first name
+        </p>
+      </div>
+
+      <!-- Second Name -->
+      <div class="relative my-1 w-full bg-inherit">
+        <input
+          type="text"
+          id="secondName"
+          formControlName="secondName"
+          placeholder=""
+          class="peer h-10 w-full rounded-lg bg-transparent px-4 text-sm text-gray-900 placeholder-transparent ring-1 focus:outline-none"
+          [ngClass]="{
+            'focus:ring-primary focus:border-primary ring-gray-300': validate('secondName'),
+            'focus:ring-red-500 focus:border-red-500 ring-red-500': !validate('secondName')
+          }"
+        />
+        <label
+          for="secondName"
+          class="absolute -top-3 left-0 mx-1 cursor-text bg-inherit px-2 text-xs transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-focus:-top-3 peer-focus:text-sm"
+          [ngClass]="{
+            'peer-focus:text-primary text-gray-500 peer-placeholder-shown:text-gray-500': validate('secondName'),
+            'peer-focus:text-red-500 text-red-500 peer-placeholder-shown:text-red-500': !validate('secondName')
+          }"
+        >
+          Second Name
+        </label>
+        <p
+          class="my-1 w-full px-2 text-xs text-red-500"
+          [ngClass]="{
+            'invisible': validate('secondName'),
+            'visible': !validate('secondName')
+          }"
+        >
+          * Please enter a valid second name
         </p>
       </div>
 

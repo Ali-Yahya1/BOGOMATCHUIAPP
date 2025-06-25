@@ -13,12 +13,12 @@ export class ResetPasswordService
   // Send Reset Password Link
   sendResetPasswordLink(email: string)
   {
-    return this.http.post<any>(`${ this.baseUrl }/SendResetEmail/${ email }`, {});
+    return this.http.post<any>(`${ this.baseUrl }/Send-Reset-Email/${ email }`, {});
   }
 
   // Reset Password Link
   resetPassword(resetPasswordObj: ResetPasswordAPI)
   {
-    return this.http.post<any>(`${ this.baseUrl }/ResetPassword/`, resetPasswordObj);
+    return this.http.post<any>(`${ this.baseUrl }/Reset-Password/`, resetPasswordObj);
   }
 }
