@@ -15,7 +15,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   } else {
     toast.error('Please Login First!');
-    router.navigate(['/login'],{ queryParams: { returnUrl: state.url } });
+    router.navigate(['/signin'],{ queryParams: { returnUrl: state.url } });
     return false;
   }
 };
