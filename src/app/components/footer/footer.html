@@ -21,7 +21,7 @@
     <div>
       <h3 class="font-primary my-2 text-lg font-semibold">Navigation</h3>
       <ul class="font-primary space-y-1 text-sm text-gray-700">
-        @for (item of firstLinks(); track item.name) {
+        @for (item of firstLinks; track item.name) {
         <li><a routerLink="{{item.url}}"> {{item.name}} </a></li>
         }
       </ul>
@@ -31,7 +31,7 @@
     <div>
       <h3 class="font-primary my-2 text-lg font-semibold">Helps</h3>
       <ul class="font-primary space-y-1 text-sm text-gray-700">
-        @for (item of secondLinks(); track item.name) {
+        @for (item of secondLinks; track item.name) {
         <li><a routerLink="{{item.url}}"> {{item.name}} </a></li>
         }
       </ul>
@@ -41,7 +41,7 @@
     <div>
       <h3 class="font-primary my-2 text-lg font-semibold">Helps</h3>
       <ul class="font-primary space-y-1 text-sm text-gray-700">
-        @for (item of thirdLinks(); track item.name) {
+        @for (item of thirdLinks; track item.name) {
         <li><a routerLink="{{item.url}}"> {{item.name}} </a></li>
         }
       </ul>
@@ -65,7 +65,7 @@
     <div class="mx-auto flex flex-row items-center justify-between gap-4 px-4">
       <p>Copyright &#64; {{currentYear}}, Bogomatch.com. All Rights Reserved</p>
       <div class="flex space-x-2">
-        @for (image of images(); track image) {
+        @for (image of images; track image) {
         <img src="{{image}}" alt="Image" class="h-7 rounded" />
         }
       </div>

@@ -31,4 +31,13 @@ interface ResetPasswordAPI
   confirmPassword: string;
 }
 
-export type { SignUpType, SignInType, TokenAPI, ResetPasswordAPI };
+// Link Type
+interface LinkType
+{
+  name: string;
+  icon: string;
+  url: string;
+  selected: boolean;
+}
+
+export type { SignUpType, SignInType, TokenAPI, ResetPasswordAPI, LinkType };

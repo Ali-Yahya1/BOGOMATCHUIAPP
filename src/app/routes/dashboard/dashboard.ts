@@ -2,18 +2,10 @@ import { Component, OnInit, OnDestroy, inject } from "@angular/core";
 import { NgClass } from "@angular/common";
 import { AuthService } from "@services/auth.service";
 import { UserStoreService } from "@services/userService.service";
-
-// Link Interface
-interface Link
-{
-  name: string;
-  icon: string;
-  url: string;
-  selected: boolean;
-}
+import type { LinkType } from "@models/types";
 
 // Sidebar Links
-const sidebarlinks: Link[] =
+const sidebarlinks: LinkType[] =
   [
     {
       name: "Dashboard",
@@ -36,7 +28,7 @@ const sidebarlinks: Link[] =
   ];
 
 // Dropdown Links
-const dropdownLinks: Link[] =
+const dropdownLinks: LinkType[] =
   [
     {
       name: "Edit Profile",
@@ -59,7 +51,6 @@ const dropdownLinks: Link[] =
   templateUrl: "./dashboard.html",
   styleUrl: "./dashboard.css"
 })
-
 
 export class Dashboard implements OnInit, OnDestroy
 {

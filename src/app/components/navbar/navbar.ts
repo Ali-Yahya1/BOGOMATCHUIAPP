@@ -1,4 +1,4 @@
-import { Component, signal } from "@angular/core";
+import { Component } from "@angular/core";
 
 const icons: string[] = ["fas fa-bell", "fas fa-user", "fas fa-shopping-cart", "fas fa-tags"];
 
@@ -11,5 +11,5 @@ const icons: string[] = ["fas fa-bell", "fas fa-user", "fas fa-shopping-cart", "
 
 export class Navbar
 {
-  icons = signal(icons);
+  icons = icons;
 }

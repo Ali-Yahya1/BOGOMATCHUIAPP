@@ -1,35 +1,83 @@
-import { Component, signal } from "@angular/core";
+import { Component } from "@angular/core";
 import { RouterLink } from "@angular/router";
+import type { LinkType } from "@models/types";
 
-// Links
-interface Link
-{
-  name: string;
-  url: string;
-}
-
-const fisrtLinks: Link[] =
+// First Links
+const firstLinks: LinkType[] =
   [
-    { name: "Home", url: "/" },
-    { name: "About Us", url: "/about" },
-    { name: "Deals", url: "/deals" }
+    {
+      name: "Home",
+      icon: "",
+      url: "/",
+      selected: false
+    },
+    {
+      name: "About Us",
+      icon: "",
+      url: "/about-us",
+      selected: false
+    },
+    {
+      name: "Deals",
+      icon: "",
+      url: "/deals",
+      selected: false
+    }
   ];
 
-const secondLinks: Link[] =
+// Second Links
+const secondLinks: LinkType[] =
   [
-    { name: "Contact", url: "/contact" },
-    { name: "FAQs", url: "/faqs" },
-    { name: "Terms & Conditions", url: "/terms" },
-    { name: "Privacy Policy", url: "/privacy" }
+    {
+      name: "Contact",
+      icon: "",
+      url: "/contact",
+      selected: false
+    },
+    {
+      name: "FAQs",
+      icon: "",
+      url: "/faqs",
+      selected: false
+    },
+    {
+      name: "Terms & Conditions",
+      icon: "",
+      url: "/terms-and-conditions",
+      selected: false
+    },
+    {
+      name: "Privacy Policy",
+      icon: "",
+      url: "/privacy-policy",
+      selected: false
+    }
   ];
 
-const thirdLinks: Link[] =
+// Third Links
+const thirdLinks: LinkType[] =
   [
-    { name: "Return Items", url: "/return" },
-    { name: "Eligible Items for Return", url: "/eligible" },
-    { name: "Become a patner", url: "/patners" }
+    {
+      name: "Return Items",
+      icon: "",
+      url: "/return-items",
+      selected: false
+    },
+    {
+      name: "Eligible Items for Return",
+      icon: "",
+      url: "/eligible-items-for-return",
+      selected: false
+    },
+    {
+      name: "Become a patner",
+      icon: "",
+      url: "/become-a-patner",
+      selected: false
+    }
   ];
 
+// Images
 const images: string[] = ["./applepay.png", "./visa.png", "./discover.png", "./mastercard.png", "securePayment.png"];
 
 @Component({
@@ -41,11 +89,11 @@ const images: string[] = ["./applepay.png", "./visa.png", "./discover.png", "./m
 
 export class Footer
 {
-  firstLinks = signal(fisrtLinks);
-  secondLinks = signal(secondLinks);
-  thirdLinks = signal(thirdLinks);
+  firstLinks = firstLinks;
+  secondLinks = secondLinks;
+  thirdLinks = thirdLinks;
 
-  images = signal(images);
+  images = images;
 
   // Footer Year
   currentYear = new Date().getFullYear();
