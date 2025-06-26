@@ -45,12 +45,6 @@ export class AuthService
     return localStorage.getItem("token");
   }
 
-  // Refresh Token
-  refreshToken(tokenAPI: string): Observable<object>
-  {
-    return this.http.post<object>(`${ this.baseURL }/refreshtoken`, tokenAPI);
-  }
-
   // Store Refresh Token
   storeRefreshToken(tokenValue: string): void
   {
@@ -100,8 +94,8 @@ export class AuthService
   }
 
   // Renew Token
-  renewToken(tokenAPI: TokenAPI): Observable<object>
+  renewToken(tokenAPI: TokenAPI): Observable<TokenAPI>
   {
-    return this.http.post<any>(`${ this.baseURL }/refresh`, tokenAPI);
+    return this.http.post<TokenAPI>(`${ this.baseURL }/refresh`, tokenAPI);
   }
 }

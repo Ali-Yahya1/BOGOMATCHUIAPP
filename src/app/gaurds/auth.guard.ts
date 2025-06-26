@@ -1,21 +1,21 @@
-import { CanActivateFn, Router } from '@angular/router';
-import { inject } from '@angular/core';
-import { HotToastService } from '@ngxpert/hot-toast';
+import { inject } from "@angular/core";
+import { CanActivateFn, Router } from "@angular/router";
+import { HotToastService } from "@ngxpert/hot-toast";
 
+export const authGuard: CanActivateFn = (route, state): boolean =>
+{
+  const router: Router = inject(Router);
+  const toaster: HotToastService = inject(HotToastService);
 
-
-export const authGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-  const toast = inject(HotToastService);
-
-  const token  = !!localStorage.getItem('token'); 
-  const isAuthenticated = !!token;
-
-  if (isAuthenticated) {
+  if (localStorage.getItem("token"))
+  {
     return true;
-  } else {
-    toast.error('Please Login First!');
-    router.navigate(['/signin'],{ queryParams: { returnUrl: state.url } });
+  }
+  else
+  {
+    toaster.error("Access denied. Please log in first.");
+    router.navigate(["/signin"], { queryParams: { returnUrl: state.url } });
+
     return false;
   }
 };
