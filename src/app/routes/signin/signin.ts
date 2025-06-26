@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
+import { Component, ChangeDetectionStrategy, inject, signal } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
@@ -7,11 +7,12 @@ import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { AuthService } from "@services/auth.service";
 import { UserStoreService } from "@services/userService.service";
+import { Loader } from "@components/loader/loader";
 import validateForm from "@helpers/validateForm";
 
 @Component({
   selector: "app-signin",
-  imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer],
+  imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer, Loader],
   templateUrl: "./signin.html",
   styleUrl: "./signin.css",
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -23,6 +24,8 @@ export class SignIn
   private auth = inject(AuthService);
   private userStore = inject(UserStoreService);
   private toaster = inject(HotToastService);
+
+  loading = signal(false);
 
   // Password Eye
   type: string = "password";
@@ -61,6 +64,8 @@ export class SignIn
   {
     if (this.loginForm.valid)
     {
+      this.loading.set(true);
+
       this.auth.signIn(this.loginForm.value)
         .subscribe({
           next: (res) =>
@@ -93,6 +98,7 @@ export class SignIn
           },
           error: () =>
           {
+            this.loading.set(false);
             this.toaster.error("Something went wrong. Please try again later.");
           }
         });

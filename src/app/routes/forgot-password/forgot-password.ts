@@ -1,16 +1,17 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
 import { HotToastService } from "@ngxpert/hot-toast";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
+import { Loader } from "@components/loader/loader";
 import { ResetPasswordService } from "@services/resetPassword.service";
 import validateForm from "@helpers/validateForm";
 
 @Component({
   selector: "app-forgot-password",
-  imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer],
+  imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer, Loader],
   templateUrl: "./forgot-password.html",
   styleUrl: "./forgot-password.css"
 })
@@ -20,6 +21,8 @@ export class ForgotPassword
   private router = inject(Router);
   private resetService = inject(ResetPasswordService);
   private toaster = inject(HotToastService);
+
+  loading = signal(false);
 
   // Inputs
   theForm: FormGroup = new FormGroup({
@@ -44,6 +47,8 @@ export class ForgotPassword
   {
     if (this.theForm.valid)
     {
+      this.loading.set(true);
+
       this.resetService.sendResetPasswordLink(this.theForm.value["email"]).subscribe(
         {
           next: () =>
@@ -53,6 +58,7 @@ export class ForgotPassword
           },
           error: () =>
           {
+            this.loading.set(false);
             this.toaster.error("Something went wrong. Please try again later.");
           }
         }

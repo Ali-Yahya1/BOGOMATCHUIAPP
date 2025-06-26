@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject } from "@angular/core";
+import { Component, ChangeDetectionStrategy, inject, signal } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
@@ -6,11 +6,12 @@ import { HotToastService } from "@ngxpert/hot-toast";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { AuthService } from "@services/auth.service";
+import { Loader } from "@components/loader/loader";
 import validateForm from "@helpers/validateForm";
 
 @Component({
   selector: "app-signup",
-  imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer],
+  imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer, Loader],
   templateUrl: "./signup.html",
   styleUrl: "./signup.css",
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -21,6 +22,8 @@ export class SignUp
   private router = inject(Router);
   private auth = inject(AuthService);
   private toaster = inject(HotToastService);
+
+  loading = signal(false);
 
   // Password Eye
   type: string = "password";
@@ -62,6 +65,8 @@ export class SignUp
   {
     if (this.registerForm.valid)
     {
+      this.loading.set(true);
+
       this.auth.signUp(this.registerForm.value)
         .subscribe({
           next: () =>
@@ -72,6 +77,7 @@ export class SignUp
           },
           error: () =>
           {
+            this.loading.set(false);
             this.toaster.error("Something went wrong. Please try again later.");
           }
         });
