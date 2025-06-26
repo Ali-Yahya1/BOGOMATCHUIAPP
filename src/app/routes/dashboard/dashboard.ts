@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, OnInit, OnDestroy, inject } from "@angular/core";
 import { NgClass } from "@angular/common";
 import { AuthService } from "@services/auth.service";
 import { UserStoreService } from "@services/userService.service";
@@ -61,7 +61,7 @@ const dropdownLinks: Link[] =
 })
 
 
-export class Dashboard
+export class Dashboard implements OnInit, OnDestroy
 {
   private auth = inject(AuthService);
   private userStore = inject(UserStoreService);

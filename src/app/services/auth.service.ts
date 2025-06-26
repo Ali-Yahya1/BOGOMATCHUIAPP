@@ -3,8 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import type { Observable } from "rxjs";
-import type { SignUpType, SignInType, TokenAPI } from "@lib/types";
-import { TokenApiModel } from "@app/Models/token-api.model";
+import type { SignUpType, SignInType, TokenAPI } from "@models/types";
 
 @Injectable({ providedIn: "root" })
 
@@ -16,9 +15,9 @@ export class AuthService
   private baseURL: string = "https://localhost:7066/api/User";
 
   // Sign Up
-  signUp(userObj: SignUpType): Observable<Object>
+  signUp(userObj: SignUpType): Observable<object>
   {
-    return this.http.post<Object>(`${ this.baseURL }/Register`, userObj);
+    return this.http.post<object>(`${ this.baseURL }/Register`, userObj);
   }
 
   // Sign In
@@ -47,9 +46,9 @@ export class AuthService
   }
 
   // Refresh Token
-  refreshToken(tokenAPI: string): Observable<Object>
+  refreshToken(tokenAPI: string): Observable<object>
   {
-    return this.http.post<Object>(`${ this.baseURL }/refreshtoken`, tokenAPI);
+    return this.http.post<object>(`${ this.baseURL }/refreshtoken`, tokenAPI);
   }
 
   // Store Refresh Token
@@ -100,7 +99,9 @@ export class AuthService
     return null;
   }
 
-  renewToken(tokenApi: TokenApiModel) {
-    return this.http.post<any>(`${this.baseURL}refresh`, tokenApi);
+  // Renew Token
+  renewToken(tokenAPI: TokenAPI): Observable<object>
+  {
+    return this.http.post<any>(`${ this.baseURL }/refresh`, tokenAPI);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import type { ResetPasswordAPI } from "@app/lib/types";
+import type { ResetPasswordAPI } from "@models/types";
 
 @Injectable({ providedIn: "root" })
 
@@ -17,7 +17,7 @@ export class ResetPasswordService
   }
 
   // Reset Password Link
-  resetPassword(resetPasswordObj)
+  resetPassword(resetPasswordObj: ResetPasswordAPI)
   {
     return this.http.post<any>(`${ this.baseUrl }/Reset-Password/`, resetPasswordObj);
   }

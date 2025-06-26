@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
@@ -6,8 +6,8 @@ import { HotToastService } from "@ngxpert/hot-toast";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { ResetPasswordService } from "@services/resetPassword.service";
-import type { ResetPasswordAPI } from "@app/lib/types";
-import validateForm from "@lib/validateForm";
+import validateForm from "@helpers/validateForm";
+import type { ResetPasswordAPI } from "@models/types";
 
 @Component({
   selector: "app-reset-password",
@@ -98,7 +98,7 @@ export class ResetPassword implements OnInit
       }
       else
       {
-        this.toaster.error("Passwords should match.");
+        this.toaster.error("Passwords do not match.");
       }
     }
     else

@@ -6,7 +6,7 @@ import { HotToastService } from "@ngxpert/hot-toast";
 import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { ResetPasswordService } from "@services/resetPassword.service";
-import validateForm from "@lib/validateForm";
+import validateForm from "@helpers/validateForm";
 
 @Component({
   selector: "app-forgot-password",

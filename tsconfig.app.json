@@ -5,11 +5,14 @@
     "types": [],
     "baseUrl": "./",
     "paths": {
-      "@app/*": ["./src/app/*"],
-      "@components/*": ["./src/app/components/*"],
       "@routes/*": ["./src/app/routes/*"],
-      "@lib/*": ["./src/app/lib/*"],
-      "@services/*": ["./src/app/services/*"]
+      "@components/*": ["./src/app/components/*"],
+      "@models/*": ["./src/app/models/*"],
+      "@services/*": ["./src/app/services/*"],
+      "@helpers/*": ["./src/app/helpers/*"],
+      "@guards/*": ["./src/app/gaurds/*"],
+      "@interceptors/*": ["./src/app/interceptors/*"],
+      "@app/*": ["./src/app/*"]
     }
   },
   "include": ["src/**/*.ts"],

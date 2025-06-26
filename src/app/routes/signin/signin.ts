@@ -7,7 +7,7 @@ import { Navbar } from "@components/navbar/navbar";
 import { Footer } from "@components/footer/footer";
 import { AuthService } from "@services/auth.service";
 import { UserStoreService } from "@services/userService.service";
-import validateForm from "@lib/validateForm";
+import validateForm from "@helpers/validateForm";
 
 @Component({
   selector: "app-signin",
@@ -67,7 +67,7 @@ export class SignIn
           {
             this.loginForm.reset();
             this.auth.storeToken(res.accessToken);
-            this.auth.refreshToken(res.refreshToken);
+            this.auth.storeRefreshToken(res.refreshToken);
 
             const tokenPayload: object | null = this.auth.decodeToken();
 

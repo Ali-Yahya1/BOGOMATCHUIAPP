@@ -5,7 +5,7 @@ import { SignUp } from "@routes/signup/signup";
 import { Dashboard } from "@routes/dashboard/dashboard";
 import { ForgotPassword } from "@routes/forgot-password/forgot-password";
 import { ResetPassword } from "@routes/reset-password/reset-password";
-import { authGuard } from "./gaurds/auth.guard";
+import { authGuard } from "@guards/auth.guard";
 
 export const routes: Routes =
   [
