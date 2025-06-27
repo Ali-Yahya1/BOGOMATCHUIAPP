@@ -22,6 +22,12 @@ interface TokenAPI
   refreshToken: string;
 }
 
+// Google Token
+interface GoogleTokenAPI
+{
+  googleAccessToken: string;
+}
+
 // Reset Password API
 interface ResetPasswordAPI
 {
@@ -40,4 +46,4 @@ interface LinkType
   selected: boolean;
 }
 
-export type { SignUpType, SignInType, TokenAPI, ResetPasswordAPI, LinkType };
+export type { SignUpType, SignInType, TokenAPI, GoogleTokenAPI, ResetPasswordAPI, LinkType };

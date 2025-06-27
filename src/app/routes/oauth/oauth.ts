@@ -4,7 +4,7 @@ import { HotToastService } from "@ngxpert/hot-toast";
 import { AuthService } from "@services/auth.service";
 import { UserStoreService } from "@services/userService.service";
 import { Loader } from "@components/loader/loader";
-import type { TokenAPI } from "@models/types";
+import type { TokenAPI, GoogleTokenAPI } from "@models/types";
 
 @Component({
   selector: "app-oauth",
@@ -29,7 +29,9 @@ export class OAuth implements OnInit
 
     if (token)
     {
-      this.auth.signInGoogle(token)
+      const obj: GoogleTokenAPI = { googleAccessToken: token };
+
+      this.auth.signInGoogle(obj)
         .subscribe({
           next: (res: TokenAPI) =>
           {

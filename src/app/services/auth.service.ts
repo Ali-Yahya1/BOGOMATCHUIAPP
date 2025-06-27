@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import type { Observable } from "rxjs";
-import type { SignUpType, SignInType, TokenAPI } from "@models/types";
+import type { SignUpType, SignInType, TokenAPI, GoogleTokenAPI } from "@models/types";
 
 @Injectable({ providedIn: "root" })
 
@@ -100,7 +100,7 @@ export class AuthService
   }
 
   // Sign In Google
-  signInGoogle(googleAccessToken: string): Observable<TokenAPI>
+  signInGoogle(googleAccessToken: GoogleTokenAPI): Observable<TokenAPI>
   {
     return this.http.post<TokenAPI>(`${ this.baseURL }/OAuth`, googleAccessToken);
   }

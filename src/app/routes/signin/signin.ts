@@ -109,4 +109,21 @@ export class SignIn
       validateForm(this.loginForm);
     }
   }
+
+  // Handle Google Login
+  handleGoogleLogin(): void
+  {
+    const clientId: string = "537360055994-o35srlpeqtilnsigned5ovgah01geegb.apps.googleusercontent.com";
+    const redirectURI: string = "http://localhost:4200/oauth";
+
+    const url: string = `https://accounts.google.com/o/oauth2/v2/auth?` +
+      `client_id=${ clientId }` +
+      `&redirect_uri=${ encodeURIComponent(redirectURI) }` +
+      `&response_type=token` +
+      `&scope=openid%20email%20profile` +
+      `&include_granted_scopes=true` +
+      `&state=secure_random_state_string`;
+
+    window.location.href = url;
+  }
 }
