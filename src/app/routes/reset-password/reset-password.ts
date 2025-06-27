@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, signal } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute, type ParamMap } from "@angular/router";
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgClass } from "@angular/common";
 import { HotToastService } from "@ngxpert/hot-toast";
@@ -45,7 +45,7 @@ export class ResetPassword implements OnInit
   // On Mount
   ngOnInit(): void
   {
-    this.route.queryParamMap.subscribe((params) =>
+    this.route.queryParamMap.subscribe((params: ParamMap) =>
     {
       this.email = params.get("email");
       this.emailToken = params.get("code");

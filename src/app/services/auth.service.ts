@@ -98,4 +98,10 @@ export class AuthService
   {
     return this.http.post<TokenAPI>(`${ this.baseURL }/refresh`, tokenAPI);
   }
+
+  // Sign In Google
+  signInGoogle(googleAccessToken: string): Observable<TokenAPI>
+  {
+    return this.http.post<TokenAPI>(`${ this.baseURL }/OAuth`, googleAccessToken);
+  }
 }

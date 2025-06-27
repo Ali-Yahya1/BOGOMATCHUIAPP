@@ -9,6 +9,7 @@ import { AuthService } from "@services/auth.service";
 import { UserStoreService } from "@services/userService.service";
 import { Loader } from "@components/loader/loader";
 import validateForm from "@helpers/validateForm";
+import type { TokenAPI } from "@models/types";
 
 @Component({
   selector: "app-signin",
@@ -68,7 +69,7 @@ export class SignIn
 
       this.auth.signIn(this.loginForm.value)
         .subscribe({
-          next: (res) =>
+          next: (res: TokenAPI) =>
           {
             this.loginForm.reset();
             this.auth.storeToken(res.accessToken);

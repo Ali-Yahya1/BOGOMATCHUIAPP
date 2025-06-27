@@ -9,6 +9,8 @@ import { AuthService } from "@services/auth.service";
 import { Loader } from "@components/loader/loader";
 import validateForm from "@helpers/validateForm";
 
+declare const google: any;
+
 @Component({
   selector: "app-signup",
   imports: [RouterLink, NgClass, ReactiveFormsModule, Navbar, Footer, Loader],
@@ -86,5 +88,22 @@ export class SignUp
     {
       validateForm(this.registerForm);
     }
+  }
+
+  // Handle Google Login
+  handleGoogleLogin(): void
+  {
+    const clientId: string = "537360055994-o35srlpeqtilnsigned5ovgah01geegb.apps.googleusercontent.com";
+    const redirectURI: string = "http://localhost:4200/oauth";
+
+    const url: string = `https://accounts.google.com/o/oauth2/v2/auth?` +
+      `client_id=${ clientId }` +
+      `&redirect_uri=${ encodeURIComponent(redirectURI) }` +
+      `&response_type=token` +
+      `&scope=openid%20email%20profile` +
+      `&include_granted_scopes=true` +
+      `&state=secure_random_state_string`;
+
+    window.location.href = url;
   }
 }
